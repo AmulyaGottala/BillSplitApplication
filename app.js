@@ -7,23 +7,16 @@ function billSplit() {
   const gst = cgst + sgst;
   const discount = document.getElementById("checkbox").checked;
 
-  if (billAmount <= 0) {
+  if (billAmount <= 0 || isNaN(billAmount)) {
     alert("enter valid amount");
-    document.getElementById("billAmount").value = "";
-    document.getElementById("personCount").value = "";
-  } else if (personCount <= 1) {
+    // document.getElementById("billAmount").value = "";
+    // document.getElementById("personCount").value = "";
+  } else if (personCount <= 1 || isNaN(personCount)) {
     alert("enter more than 1 person to split bill");
-    document.getElementById("billAmount").value = "";
-    document.getElementById("personCount").value = "";
-  } else if (
-    typeof billAmount !== "number" &&
-    typeof personCount !== "number"
-  ) {
-    alert("Enter in Numbers");
-    document.getElementById("billAmount").value = "";
-    document.getElementById("personCount").value = "";
+    // document.getElementById("billAmount").value = "";
+    // document.getElementById("personCount").value = "";
   } else if (discount) {
-    let bill = billAmount - billAmount * 0.05 + billAmount * gst;
+    let bill = billAmount - billAmount * 0.05 - billAmount * gst;
     console.log(bill);
     finalValue = bill / personCount;
     finalBillAmount.value = Math.round(finalValue);
@@ -31,15 +24,13 @@ function billSplit() {
     document.getElementById("personCount").value = "";
     document.getElementById("checkbox").checked = false;
   } else if (discount === false) {
-    let billing = billAmount + billAmount * gst;
+    let billing = billAmount - billAmount * gst;
     console.log(billing);
     finalValue = billing / personCount;
     finalBillAmount.value = Math.round(finalValue);
     document.getElementById("billAmount").value = "";
     document.getElementById("personCount").value = "";
-    billAmount = "";
-    personCount = "";
   }
 }
 
-console.log(typeof 2);
+console.log(typeof "sdfjh");
